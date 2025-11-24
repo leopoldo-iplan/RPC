@@ -76,8 +76,13 @@ class RPCServer:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
             sock.bind(self.address)
             sock.listen()
+            
+            print(f'+ Server {self.host} in port {self.port} is running. (ctrl+c) to stop')
+            
+            list_metohods = []
+            for k,v in self._methods.items(): list_metohods.append(k)
+            print('  - Registered method:', f", ".join(list_metohods))
 
-            print(f'+ Server {self.address} running')
             while True:
                 try:
                     client, address = sock.accept()
